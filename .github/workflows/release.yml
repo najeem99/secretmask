@@ -1,0 +1,25 @@
+name: Release
+on:
+  push: { tags: ['v*'] }
+permissions: { contents: write }
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm, registry-url: 'https://registry.npmjs.org' }
+      - run: npm ci && npm test
+      - run: npm run package
+      - name: Publish to VS Code Marketplace
+        run: npx vsce publish --no-dependencies -p "$VSCE_PAT"
+        working-directory: packages/vscode
+        env: { VSCE_PAT: '${{ secrets.VSCE_PAT }}' }
+      - name: Publish to Open VSX (Cursor, Windsurf, VSCodium)
+        run: npx ovsx publish packages/vscode/*.vsix -p "$OVSX_PAT"
+        env: { OVSX_PAT: '${{ secrets.OVSX_PAT }}' }
+      - name: Publish CLI to npm
+        run: npm publish -w secretmask --access public
+        env: { NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}' }
+      - uses: softprops/action-gh-release@v2
+        with: { files: packages/vscode/*.vsix, generate_release_notes: true }

@@ -1,0 +1,13 @@
+{
+  "name": "secretmask",
+  "version": "0.2.0",
+  "description": "Hide secrets from AI coding agents with reversible tokens. CLI for Claude Code hooks and git filters.",
+  "license": "MIT",
+  "bin": { "secretmask": "dist/secretmask.js" },
+  "files": ["dist"],
+  "keywords": ["secrets", "claude-code", "ai", "security", "git-filter"],
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/secretmask.js"
+  },
+  "dependencies": { "@secretmask/core": "*" }
+}

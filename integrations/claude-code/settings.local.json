@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "SessionStart": [{ "hooks": [{ "type": "command", "command": "secretmask mask" }] }],
+    "PostToolUse": [{ "matcher": "Write|Edit|MultiEdit", "hooks": [{ "type": "command", "command": "secretmask mask" }] }],
+    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "secretmask unmask" }] }]
+  }
+}

@@ -2,3 +2,5 @@ node_modules/
 dist/
 *.vsix
 out/
+packages/vscode/README.md
+packages/vscode/LICENSE

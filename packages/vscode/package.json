@@ -1,0 +1,30 @@
+{
+  "name": "secretmask-vscode",
+  "displayName": "SecretMask – Hide Secrets from AI",
+  "description": "Replaces credentials with reversible tokens while Claude Code (or any AI) works on your code, restores them when it's done, and keeps git diffs clean.",
+  "version": "0.2.0",
+  "publisher": "najeem99",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/najeem99/secretmask" },
+  "bugs": { "url": "https://github.com/najeem99/secretmask/issues" },
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other", "AI"],
+  "keywords": ["secrets", "credentials", "claude", "ai", "security", "mask", "copilot", "cursor"],
+  "main": "./dist/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [
+      { "command": "secretmask.mask", "title": "Mask Secrets", "category": "SecretMask" },
+      { "command": "secretmask.unmask", "title": "Unmask Secrets", "category": "SecretMask" },
+      { "command": "secretmask.toggle", "title": "Toggle", "category": "SecretMask" },
+      { "command": "secretmask.setupClaude", "title": "Install Claude Code Hooks", "category": "SecretMask" },
+      { "command": "secretmask.setupGit", "title": "Install Git Filter", "category": "SecretMask" },
+      { "command": "secretmask.setupAll", "title": "Set Up Everything", "category": "SecretMask" }
+    ]
+  },
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --platform=node --target=node18 --external:vscode --outfile=dist/extension.js && esbuild ../cli/src/index.ts --bundle --platform=node --target=node18 --outfile=dist/secretmask.js",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": { "@secretmask/core": "*" }
+}

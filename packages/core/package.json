@@ -1,0 +1,13 @@
+{
+  "name": "@secretmask/core",
+  "version": "0.2.0",
+  "description": "Reversible, deterministic secret tokenization. No editor or git dependencies.",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsx --test test/*.test.ts"
+  }
+}

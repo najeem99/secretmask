@@ -1,26 +1,19 @@
 {
-  "name": "secretmask",
-  "displayName": "SecretMask – Hide Secrets from AI",
-  "description": "Replaces credentials with reversible tokens while Claude Code (or any AI) works on your code, restores them when it's done, and keeps git diffs clean.",
-  "version": "0.1.0",
-  "publisher": "najeem99",
-  "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/najeem99/secretmask" },
-  "engines": { "vscode": "^1.85.0" },
-  "categories": ["Other", "AI"],
-  "keywords": ["secrets", "credentials", "claude", "ai", "security", "mask", "copilot"],
-  "main": "./src/extension.js",
-  "bin": { "secretmask": "./src/cli.js" },
-  "activationEvents": ["onStartupFinished"],
-  "contributes": {
-    "commands": [
-      { "command": "secretmask.mask", "title": "SecretMask: Mask Secrets" },
-      { "command": "secretmask.unmask", "title": "SecretMask: Unmask Secrets" },
-      { "command": "secretmask.toggle", "title": "SecretMask: Toggle" },
-      { "command": "secretmask.setupClaude", "title": "SecretMask: Install Claude Code Hooks" },
-      { "command": "secretmask.setupGit", "title": "SecretMask: Install Git Filter" },
-      { "command": "secretmask.setupAll", "title": "SecretMask: Set Up Everything" }
-    ]
+  "name": "secretmask-monorepo",
+  "private": true,
+  "workspaces": ["packages/core", "packages/cli", "packages/vscode"],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run test -w @secretmask/core && npm run build && bash test/e2e.sh",
+    "build": "npm run build -w secretmask && npm run build -w secretmask-vscode",
+    "package": "npm run build && cp README.md LICENSE packages/vscode/ && npm run package -w secretmask-vscode"
   },
-  "scripts": { "test": "bash test/e2e.sh" }
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
 }

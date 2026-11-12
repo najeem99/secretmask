@@ -1,0 +1,11 @@
+# Demo project. These are FAKE credentials for testing SecretMask.
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@db:1521/XE
+    username: app
+    password: Claude123
+aws:
+  access-key: AKIAABCDEFGHIJKLMNOP
+  secret-key: wJalrXUtnFEMIK7MDENGbPxRfiCY
+kafka:
+  sasl-password: ${KAFKA_PWD}
