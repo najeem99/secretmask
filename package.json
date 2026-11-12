@@ -9,7 +9,7 @@
     "package": "npm run build && cp README.md LICENSE packages/vscode/ && npm run package -w secretmask-vscode"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@types/node": "^26.6.6",
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^3.0.0",
     "esbuild": "^0.24.0",
